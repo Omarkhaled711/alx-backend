@@ -15,7 +15,7 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
     parameters.
     """
     start_index = (page - 1) * page_size
-    end_index = start_index + page_size - 1
+    end_index = start_index + page_size
     return start_index, end_index
 
 
@@ -52,7 +52,7 @@ class Server:
         data = self.dataset()
         try:
             content = [data[i]
-                       for i in range(index[0], index[1] + 1)]
+                       for i in range(index[0], index[1])]
             return content
         except IndexError:
             return []
