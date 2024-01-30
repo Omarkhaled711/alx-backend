@@ -1,10 +1,10 @@
-import csv
-import math
-from typing import List, Tuple
-
+#!/usr/bin/env python3
 """
 second task module
 """
+import csv
+import math
+from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
