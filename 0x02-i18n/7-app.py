@@ -30,6 +30,7 @@ class Config():
 app.config.from_object(Config)
 
 
+@babel.localeselector
 def get_locale() -> str:
     """
     responsible for determining the best-matching
@@ -47,6 +48,7 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+@babel.timezoneselector
 def get_timezone() -> str:
     """ get timezone """
     if request.args.get('timezone'):
@@ -57,9 +59,6 @@ def get_timezone() -> str:
         return timezone(time)
     except exceptions.UnknownTimeZoneError:
         return timezone(app.config['BABEL_DEFAULT_TIMEZONE'])
-
-
-babel.init_app(app, locale_selector=get_locale, timezone_selector=get_timezone)
 
 
 def get_user() -> Union[dict, None]:
