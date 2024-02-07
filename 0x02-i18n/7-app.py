@@ -5,6 +5,7 @@ First task module
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 from pytz import exceptions, timezone
+from typing import Union
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -29,7 +30,7 @@ class Config():
 app.config.from_object(Config)
 
 
-def get_locale():
+def get_locale() -> str:
     """
     responsible for determining the best-matching
     locale based on the user's preferences from the
@@ -46,7 +47,7 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_timezone():
+def get_timezone() -> str:
     """ get timezone """
     if request.args.get('timezone'):
         time = request.args.get('timezone')
@@ -61,7 +62,7 @@ def get_timezone():
 babel.init_app(app, locale_selector=get_locale, timezone_selector=get_timezone)
 
 
-def get_user():
+def get_user() -> Union[dict, None]:
     """
     get the logged in user
     """
@@ -80,7 +81,7 @@ def before_request():
 
 
 @app.route('/', strict_slashes=False)
-def home_page():
+def home_page() -> str:
     """
     renders the 1-index.html template
     """

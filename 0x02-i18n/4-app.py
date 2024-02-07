@@ -21,7 +21,7 @@ class Config():
 app.config.from_object(Config)
 
 
-def get_locale():
+def get_locale() -> str:
     """
     responsible for determining the best-matching
     locale based on the user's preferences from the
@@ -37,7 +37,7 @@ babel.init_app(app, locale_selector=get_locale)
 
 
 @app.route('/', strict_slashes=False)
-def home_page():
+def home_page() -> str:
     """
     renders the 1-index.html template
     """
