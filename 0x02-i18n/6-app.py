@@ -29,6 +29,7 @@ class Config():
 app.config.from_object(Config)
 
 
+@babel.localeselector
 def get_locale() -> str:
     """
     responsible for determining the best-matching
@@ -44,9 +45,6 @@ def get_locale() -> str:
         return g.user.get('locale')
 
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-babel.init_app(app, locale_selector=get_locale)
 
 
 def get_user() -> Union[dict, None]:
